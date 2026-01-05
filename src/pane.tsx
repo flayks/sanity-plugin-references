@@ -211,7 +211,7 @@ export const ReferencesPane: UserViewComponent = (props) => {
                                 <Card
                                     key={doc._id}
                                     as="button"
-                                    padding={2}
+                                    padding={1}
                                     radius={2}
                                     onClick={() => router.navigateIntent('edit', { id: doc._id, type: doc._type })}
                                     style={{ cursor: 'pointer', textAlign: 'left', width: '100%' }}
