@@ -106,97 +106,104 @@ export const ReferencesPane: UserViewComponent = (props) => {
         )
     }
 
-    const useSelectForFilters = documentTypes.length > 5
+    const useSelectForFilters = documentTypes.length >= 4
 
     return (
-        <Stack space={0} style={{ height: '100%' }}>
-            {/* Toolbar */}
-            <Card borderBottom padding={2}>
-                <Flex gap={2} align="center" wrap="nowrap">
-                    {useSelectForFilters ? (
-                        <Select
-                            value={typeFilter}
-                            onChange={e => setTypeFilter(e.currentTarget.value)}
-                            fontSize={1}
-                            padding={2}
-                            style={{ minWidth: 150, flexShrink: 0 }}
-                        >
-                            <option value="all">All types</option>
-                            {documentTypes.map((type: string) => {
-                                const schemaType = getSchemaType(type)
-                                return (
-                                    <option key={type} value={type}>
-                                        {schemaType?.title || type}
-                                    </option>
-                                )
-                            })}
-                        </Select>
-                    ) : (
-                        <Inline space={2} style={{ flexShrink: 0 }}>
-                            <Flex align="center" gap={1} as="label" style={{ cursor: 'pointer', whiteSpace: 'nowrap' }}>
-                                <Radio checked={typeFilter === 'all'} onChange={() => setTypeFilter('all')} />
-                                <Text size={1} weight={typeFilter === 'all' ? 'semibold' : 'regular'}>All</Text>
-                            </Flex>
-                            {documentTypes.map((type: string) => {
-                                const schemaType = getSchemaType(type)
-                                return (
-                                    <Flex key={type} align="center" gap={1} as="label" style={{ cursor: 'pointer', whiteSpace: 'nowrap' }}>
-                                        <Radio checked={typeFilter === type} onChange={() => setTypeFilter(type)} />
-                                        <Text size={1} weight={typeFilter === type ? 'semibold' : 'regular'}>
-                                            {schemaType?.title || type}
-                                        </Text>
-                                    </Flex>
-                                )
-                            })}
-                        </Inline>
-                    )}
-                    <Box flex={1} />
-                    <Flex gap={1} style={{ flexShrink: 0 }}>
-                        <Select value={sortBy} onChange={e => setSortBy(e.currentTarget.value as SortOption)} fontSize={1} padding={2}>
-                            <option value="updatedAt">Updated</option>
-                            <option value="type">Type</option>
-                            <option value="title">Title</option>
-                        </Select>
-                        <Button
-                            icon={SortIcon}
-                            mode="ghost"
-                            onClick={() => setSortDesc((d: boolean) => !d)}
-                            title={sortDesc ? 'Descending' : 'Ascending'}
-                            fontSize={1}
-                            padding={2}
-                        />
+        <Flex direction="column" style={{ height: '100%', overflow: 'hidden' }}>
+            {/* Sticky Filters and Search */}
+            <Box style={{ flexShrink: 0 }}>
+                {/* Toolbar */}
+                <Card borderBottom padding={2}>
+                    <Flex gap={2} align="center" wrap="nowrap">
+                        {useSelectForFilters ? (
+                            <Box style={{ minWidth: 150, maxWidth: 250 }}>
+                                <Select
+                                    value={typeFilter}
+                                    onChange={e => setTypeFilter(e.currentTarget.value)}
+                                    fontSize={1}
+                                    padding={2}
+                                    style={{ width: '100%' }}
+                                >
+                                    <option value="all">All types</option>
+                                    {documentTypes.map((type: string) => {
+                                        const schemaType = getSchemaType(type)
+                                        return (
+                                            <option key={type} value={type}>
+                                                {schemaType?.title || type}
+                                            </option>
+                                        )
+                                    })}
+                                </Select>
+                            </Box>
+                        ) : (
+                            <Inline space={2} style={{ flexShrink: 0 }}>
+                                <Flex align="center" gap={1} as="label" style={{ cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                                    <Radio checked={typeFilter === 'all'} onChange={() => setTypeFilter('all')} />
+                                    <Text size={1} weight={typeFilter === 'all' ? 'semibold' : 'regular'}>All</Text>
+                                </Flex>
+                                {documentTypes.map((type: string) => {
+                                    const schemaType = getSchemaType(type)
+                                    return (
+                                        <Flex key={type} align="center" gap={1} as="label" style={{ cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                                            <Radio checked={typeFilter === type} onChange={() => setTypeFilter(type)} />
+                                            <Text size={1} weight={typeFilter === type ? 'semibold' : 'regular'}>
+                                                {schemaType?.title || type}
+                                            </Text>
+                                        </Flex>
+                                    )
+                                })}
+                            </Inline>
+                        )}
+                        <Box flex={1} />
+                        <Flex gap={1} style={{ flexShrink: 0 }}>
+                            <Select value={sortBy} onChange={e => setSortBy(e.currentTarget.value as SortOption)} fontSize={1} padding={2}>
+                                <option value="updatedAt">Updated</option>
+                                <option value="type">Type</option>
+                                <option value="title">Title</option>
+                            </Select>
+                            <Button
+                                icon={SortIcon}
+                                mode="ghost"
+                                onClick={() => setSortDesc((d: boolean) => !d)}
+                                title={sortDesc ? 'Descending' : 'Ascending'}
+                                fontSize={1}
+                                padding={2}
+                            />
+                        </Flex>
                     </Flex>
-                </Flex>
-            </Card>
+                </Card>
 
-            {/* Count + Search */}
-            <Card borderBottom paddingX={3} paddingY={0}>
-                <Flex align="stretch" style={{ minHeight: 33 }}>
-                    <Flex align="center" paddingY={2} style={{ flexShrink: 0 }}>
-                        <Text size={1} muted>
-                            {filteredDocuments.length} of {documents.length} document{documents.length !== 1 ? 's' : ''}
-                        </Text>
+                {/* Count + Search */}
+                <Card borderBottom paddingX={3} paddingY={0}>
+                    <Flex align="stretch" style={{ minHeight: 33 }}>
+                        <Flex align="center" paddingY={2} style={{ flexShrink: 0 }}>
+                            <Text size={1} muted>
+                                {filteredDocuments.length} of {documents.length} document{documents.length !== 1 ? 's' : ''}
+                            </Text>
+                        </Flex>
+                        <Box style={{ flex: 1, minWidth: 180, borderLeft: '1px solid var(--card-border-color)', paddingLeft: 4, marginLeft: 12, display: 'flex', alignItems: 'center' }}>
+                            <TextInput
+                                icon={SearchIcon}
+                                placeholder="Search..."
+                                value={searchQuery}
+                                onChange={e => setSearchQuery(e.currentTarget.value)}
+                                fontSize={1}
+                                padding={2}
+                                border={false}
+                                style={{ boxShadow: 'none', width: '100%' }}
+                            />
+                        </Box>
                     </Flex>
-                    <Box style={{ flex: 1, minWidth: 180, borderLeft: '1px solid var(--card-border-color)', paddingLeft: 4, marginLeft: 12, display: 'flex', alignItems: 'center' }}>
-                        <TextInput
-                            icon={SearchIcon}
-                            placeholder="Search..."
-                            value={searchQuery}
-                            onChange={e => setSearchQuery(e.currentTarget.value)}
-                            fontSize={1}
-                            padding={2}
-                            border={false}
-                            style={{ boxShadow: 'none', width: '100%' }}
-                        />
-                    </Box>
-                </Flex>
-            </Card>
+                </Card>
+            </Box>
 
             {/* Document list */}
             <Box style={{ flex: 1, overflow: 'auto' }}>
                 <Stack space={1} padding={2}>
                     {filteredDocuments.length === 0 ? (
-                        <Card padding={4}><Text muted align="center">No documents match your filters</Text></Card>
+                        <Card padding={4}>
+                          <Text muted align="center">No documents match your filters</Text>
+                        </Card>
                     ) : (
                         filteredDocuments.map((doc: ReferencingDocument) => {
                             const schemaType = getSchemaType(doc._type)
@@ -225,6 +232,6 @@ export const ReferencesPane: UserViewComponent = (props) => {
                     )}
                 </Stack>
             </Box>
-        </Stack>
+        </Flex>
     )
 }
