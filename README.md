@@ -6,6 +6,8 @@
   Displays a badge with the reference count and a custom pane with the full list.
 </p>
 
+![screenshot](https://github.com/user-attachments/assets/5a2256a8-da35-4d9f-b0ca-8416aa87194d)
+
 ## Features
 
 - **Reference Badge**: Shows count of documents referencing the current document
