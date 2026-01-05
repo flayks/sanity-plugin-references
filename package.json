@@ -1,6 +1,6 @@
 {
   "name": "sanity-plugin-references",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "See which documents reference the current document in Sanity Studio",
   "keywords": [
     "sanity",
