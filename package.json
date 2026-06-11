@@ -82,10 +82,10 @@
   "peerDependencies": {
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19",
-    "sanity": "^3 || ^4 || ^5"
+    "sanity": "^3 || ^4 || ^5 || ^6"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22.12"
   },
   "publishConfig": {
     "exports": {
@@ -99,7 +99,8 @@
   "browserslist": "extends @sanity/browserslist-config",
   "sanityPlugin": {
     "verifyPackage": {
-      "eslintImports": false
+      "eslintImports": false,
+      "nodeEngine": false
     }
   }
 }
