@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/flayks/sanity-plugin-references/compare/v1.0.1...v1.1.0) (2026-06-11)
+
+
+### Features
+
+* support sanity v6 peer dependency ([3bc0f51](https://github.com/flayks/sanity-plugin-references/commit/3bc0f510f9e4fbbfd85c73a2c9fe44bd4a38c0a0))
+
 ## [1.0.1](https://github.com/flayks/sanity-plugin-references/compare/v1.0.0...v1.0.1) (2026-01-05)
 
 
