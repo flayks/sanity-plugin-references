@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/flayks/sanity-plugin-references/compare/v1.1.0...v1.2.0) (2026-09-12)
+
+
+### Features
+
+* keep the badge and references tab in sync ([dd6e468](https://github.com/flayks/sanity-plugin-references/commit/dd6e4682be54d4fee0a5bc2a5c22fad94f3979bd))
+* support Sanity 6 icons, previews and release versions ([8547795](https://github.com/flayks/sanity-plugin-references/commit/85477954dc423d308504b522fa240172db74e58e))
+
 # [1.1.0](https://github.com/flayks/sanity-plugin-references/compare/v1.0.1...v1.1.0) (2026-06-11)
 
 
