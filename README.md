@@ -38,8 +38,8 @@ bun add sanity-plugin-references
 ### Basic Setup
 
 ```ts
-import { defineConfig } from 'sanity'
-import { references } from 'sanity-plugin-references'
+import {defineConfig} from 'sanity'
+import {references} from 'sanity-plugin-references'
 
 export default defineConfig({
   plugins: [references()],
@@ -53,17 +53,14 @@ This adds a **reference count badge** to all documents showing how many other do
 Add a full References tab with search, filters, and sorting:
 
 ```ts
-import { structureTool } from 'sanity/structure'
-import { references, referencesView } from 'sanity-plugin-references'
+import {structureTool} from 'sanity/structure'
+import {references, referencesView} from 'sanity-plugin-references'
 
 export default defineConfig({
   plugins: [
     references(),
     structureTool({
-      defaultDocumentNode: (S) => S.document().views([
-        S.view.form(),
-        referencesView(S),
-      ]),
+      defaultDocumentNode: (S) => S.document().views([S.view.form(), referencesView(S)]),
     }),
   ],
 })
@@ -82,7 +79,7 @@ references({
 **Customize the tab** title or icon:
 
 ```ts
-referencesView(S, { title: 'Incoming Links', icon: SomeIcon })
+referencesView(S, {title: 'Incoming Links', icon: SomeIcon})
 ```
 
 **Show tab only for specific types** by checking `schemaType` in `defaultDocumentNode`.

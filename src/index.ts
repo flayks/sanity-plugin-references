@@ -1,16 +1,17 @@
-import { definePlugin } from 'sanity'
-import type { StructureBuilder } from 'sanity/structure'
-import { LinkIcon } from '@sanity/icons'
-import type { ComponentType } from 'react'
-import { ReferencesBadge } from './badge'
-import { ReferencesPane } from './pane'
+import {LinkIcon} from '@sanity/icons/Link'
+import type {ComponentType} from 'react'
+import {definePlugin} from 'sanity'
+import type {StructureBuilder} from 'sanity/structure'
+
+import {ReferencesBadge} from './badge'
+import {ReferencesPane} from './pane'
 
 interface ReferencesConfig {
-    /**
-     * Document types to exclude from showing the References badge
-     * @example ['media.tag', 'sanity.imageAsset']
-     */
-    exclude?: string[]
+  /**
+   * Document types to exclude from showing the References badge
+   * @example ['media.tag', 'sanity.imageAsset']
+   */
+  exclude?: string[]
 }
 
 /**
@@ -40,7 +41,7 @@ interface ReferencesConfig {
  * // sanity.config.ts
  * import { structureTool } from 'sanity/structure'
  * import { references, ReferencesPane } from 'sanity-plugin-references'
- * import { LinkIcon } from '@sanity/icons'
+ * import { LinkIcon } from '@sanity/icons/Link'
  *
  * export default defineConfig({
  *   plugins: [
@@ -70,24 +71,23 @@ interface ReferencesConfig {
  * ```
  */
 export const references = definePlugin<ReferencesConfig | void>((config) => {
-    const excludeTypes = config?.exclude || []
+  const excludeTypes = config?.exclude || []
 
-    return {
-        name: 'references',
-        document: {
-            badges: (prev, context) => {
-                // Don't show badge for excluded types
-                if (excludeTypes.includes(context.schemaType)) {
-                    return prev
-                }
-                return [...prev, ReferencesBadge]
-            },
-        },
-    }
+  return {
+    name: 'references',
+    document: {
+      badges: (prev, context) => {
+        // Don't show badge for excluded types
+        if (excludeTypes.includes(context.schemaType)) {
+          return prev
+        }
+        return [...prev, ReferencesBadge]
+      },
+    },
+  }
 })
 
-export type { ReferencesConfig }
-
+export type {ReferencesConfig}
 
 /**
  * Helper to create a References view for Structure Builder.
@@ -105,16 +105,19 @@ export type { ReferencesConfig }
  * referencesView(S, { title: 'Incoming Links', icon: MyIcon })
  * ```
  */
-export function referencesView(S: StructureBuilder, options?: {
+export function referencesView(
+  S: StructureBuilder,
+  options?: {
     title?: string
     icon?: ComponentType
-}) {
-    return S.view
-        .component(ReferencesPane)
-        .title(options?.title || 'References')
-        .icon(options?.icon || LinkIcon)
+  },
+) {
+  return S.view
+    .component(ReferencesPane)
+    .title(options?.title || 'References')
+    .icon(options?.icon || LinkIcon)
 }
 
-export { ReferencesPane } from './pane'
-export { ReferencesBadge } from './badge'
-export { LinkIcon as ReferencesIcon } from '@sanity/icons'
+export {ReferencesPane} from './pane'
+export {ReferencesBadge} from './badge'
+export {LinkIcon as ReferencesIcon} from '@sanity/icons/Link'
